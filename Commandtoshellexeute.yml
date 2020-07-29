@@ -1,0 +1,22 @@
+---
+  - name: Oracle query execution
+    hosts: "{{ hostname }}"
+    tasks:
+      - name: Windows Command execution
+        block:
+          - name: Windows Command execution
+            win_shell: "{{ Command }}"
+            register: output
+          - name: print Output
+            debug:
+              var: output.stdout_lines
+        when: ansible_os_family=="Windows"
+      - name: Linux Command execution
+        block:
+          - name: Linux Command to execution
+            shell: "{{ Command }}"
+            register: output
+          - name: print Output
+            debug:
+              var: output.stdout_lines
+        when: ansible_os_family=="RedHat"
